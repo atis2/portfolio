@@ -1,5 +1,5 @@
 import sqlite3
-import config
+import config 
 
 status = [(1, 'Проектирование'),(2, 'В процессе разработки'),(3, 'Разработан'),(4, 'Обновлен'), (5, 'Завершен/Не поддерживается')]
 project = [('Subnatica','https://hub.kodland.org/ru/my-projects','Subnatica это крутая игра', 5),('Другой мир','https://hub.kodland.org/ru/my-projects', 'ты попал в другой мир и уже живешь 1 год ты уже силон и ты встретил девочку', 5),('The Forest', 'https://hub.kodland.org/ru/my-projects', 'The Forest это игра про что как выживать в лесу с соседами',2),('ХАЯО МИЯДЗАКИ','https://hub.kodland.org/ru/my-projects', 'нажми на картинки и они будут двыгатся',3)]
@@ -14,6 +14,11 @@ class DB_Manager:
         db.commit()
         db.close()
 
+    def __executemany(self, sql, data):
+        db = sqlite3.connect(config.database)
+        with db:
+            db.executemany(sql, data)
+            db.commit()
 
     def update_table(self):
         db = sqlite3.connect(config.database)
@@ -70,6 +75,24 @@ class DB_Manager:
         db.close()
         return(result)
     
+    def update_projects(self, param, data):
+        self.__executemany(f"UPDATE projects SET {param} = ? WHERE project_name = ? AND user_id = ?", [data]) # data ('atr', 'mew', 'name', 'user_id')
+
+            
+
+
+
+
+
+
+    def get_statuses(self, user_id, name_status):
+        db = sqlite3.connect(config.database)
+        with db:
+            result = db.execute('UPDATE projects SET status = ? WHERE ' ,(name_status,)).fetchall()
+            print(result)
+            db.commit()
+        db.close()
+        return(result)
 
     def get_project_skills(self, project_name):
         return("")
