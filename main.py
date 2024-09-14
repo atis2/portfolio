@@ -57,12 +57,20 @@ def start_command(message):
 def info(message):
     bot.send_message(message.chat.id,
 """
-Вот команды которые могут тебе помочь:
+'/Start' это команда начинает работу бота
 
-/new_project - используй для добавления нового проекта
-....
+'/Info'  это команда выводит все команды 
 
-Также ты можешь ввести имя проекта и узнать информацию о нем!""")
+'/New project' команда для нового проекта
+
+'/Skills' команда разрабатывается
+
+'/Projects' команда показывает все проекты
+
+'/Delete' команда удаляет проект
+
+'/Update_projects' команда обновляет проект
+""")
     
 
 @bot.message_handler(commands=['new_project'])
@@ -255,6 +263,7 @@ def text_handler(message):
     
 if __name__ == '__main__':
     manager = DB_Manager()
+    manager.update_table()
     bot.infinity_polling()
 
 

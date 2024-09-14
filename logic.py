@@ -22,21 +22,27 @@ class DB_Manager:
 
     def update_table(self):
         db = sqlite3.connect(config.database)
-        with db:
-            sql = 'INSERT INTO status (id, status_name) VALUES(?, ?)'
-            db.executemany(sql, status )
-            db.executemany('INSERT INTO projects(name, url, info, status) VALUES(?, ?, ? ,?)', project)
-            table_name = 'projects'
+        cur = db.cursor()
+        cur.execute("UPDATE projects SET foto=subnatica.jpeg WHERE name='Subnatica'")
+        cur.execute("UPDATE projects SET foto=the forest.jpg WHERE name='The Forest'")
+        cur.execute("UPDATE projects SET foto=portal.jpg WHERE name='Другой мир'")
+        cur.execute("UPDATE projects SET foto=ХАЯО МИЯДЗАКИ.jpeg WHERE name='ХАЯО МИЯДЗАКИ'")
+        # with db:
+        #     sql = 'INSERT INTO status (id, status_name) VALUES(?, ?)'
+        #     db.executemany(sql, status )
+        #     db.executemany('INSERT INTO projects(name, url, info, status) VALUES(?, ?, ? ,?)', project)
+        #     table_name = 'projects'
+           
+        #     # Название нового столбца и его тип данных
+        #     new_column_name = 'foto'
+        #     new_column_type = 'IMG'
 
-            # Название нового столбца и его тип данных
-            new_column_name = 'foto'
-            new_column_type = 'IMG'
+        #     # Выполнение запроса на добавление столбца
+        #     alter_query = f"ALTER TABLE {table_name} ADD COLUMN {new_column_name} {new_column_type}"
+        #     db.execute(alter_query)
 
-            # Выполнение запроса на добавление столбца
-            alter_query = f"ALTER TABLE {table_name} ADD COLUMN {new_column_name} {new_column_type}"
-            db.execute(alter_query)
-
-
+            
+        db.commit()
         db.close()
     def delete_status(self, status_id):
         db = sqlite3.connect(config.database)
@@ -96,3 +102,6 @@ class DB_Manager:
 
     def get_project_skills(self, project_name):
         return("")
+    
+
+    
