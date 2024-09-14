@@ -57,19 +57,19 @@ def start_command(message):
 def info(message):
     bot.send_message(message.chat.id,
 """
-'/Start' это команда начинает работу бота
+'/start' это команда начинает работу бота
 
-'/Info'  это команда выводит все команды 
+'/info'  это команда выводит все команды 
 
-'/New project' команда для нового проекта
+'/new_project' команда для нового проекта
 
 '/Skills' команда разрабатывается
 
-'/Projects' команда показывает все проекты
+'/projects' команда показывает все проекты
 
-'/Delete' команда удаляет проект
+'/delete' команда удаляет проект
 
-'/Update_projects' команда обновляет проект
+'/update_projects' команда обновляет проект
 """)
     
 
@@ -263,7 +263,7 @@ def text_handler(message):
     
 if __name__ == '__main__':
     manager = DB_Manager()
-    manager.update_table()
+    # manager.update_table()
     bot.infinity_polling()
 
 
